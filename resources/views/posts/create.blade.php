@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="mian" style="margin-top: 150px">
-        <form method="post" action="Create/check">
+        <form method="post" action="Create/check" enctype="multipart/form-data" style="width: 700px;">
             @csrf
             <div class="form-group">
                 <label for="exampleInputEmail1">Title</label>

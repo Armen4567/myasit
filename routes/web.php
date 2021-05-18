@@ -16,16 +16,22 @@ use Illuminate\Support\Facades\Route;
 Route::get('/posts', 'PostController@index')->name('posts');
 Route::get('/', 'PostController@index')->name('posts');
 Route::get('/create', 'PostController@create')->name('create');
-Route::post("Create/check","PostController@store")->name('post.store');
 Route::get('posts/{id}', "PostController@show")->name('post.show');
-Route::get('/posts/{id}/edit', 'PostController@edit')->name('posts.edit');
-Route::put('/posts/{id}', 'PostController@update')->name('posts.update');
-Route::delete   ('/posts/{id}/destroy', 'PostController@destroy')->name('posts.destroy');//Route::post('/comments', function (){
 Auth::routes();
-Route::get('/user', 'UserController@index')->name('user');
-Route::get('/admin', 'AdminController@index')->name('admin');
+// Admin Controllers
+Route::get('/admin-page','AdminController@index')->name('admin');
+Route::get('/posts-table','AdminController@posts')->name('post-table');
+Route::get('/post/{id}/edit', 'AdminController@edit')->name('post.edit');
+Route::put('/post/{id}', 'AdminController@update')->name('post.update');
+Route::delete('/post/{id}/', 'AdminController@destroy')->name('post.destroy');
+Route::post('/create-category', 'AdminController@storeCategory')->name('create-category');
+Route::get('/create', 'AdminController@create')->name('create');
+Route::get('/category', 'AdminController@categories')->name('category');
+Route::post("create-post","AdminController@store")->name('post.store');
 
-//Route::group(['middleware' => ['role:admin']], function () {
+//Route::middleware(['role:admin'])->prefix('admin_panel')->group(function () {
+//    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('homeAdmin'); // /admin
+//
+////    Route::resource('category', CategoryController::class);
+////    Route::resource('post', PostController::class);
 //});
-//Route::group(['middleware' => ['role:admin']], '/');
-
