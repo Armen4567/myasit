@@ -623,7 +623,6 @@ pre code {
   display: flex;
   flex-wrap: wrap;
   margin-right: -15px;
-  margin-left: -15px;
 }
 
 .no-gutters {
@@ -710,7 +709,7 @@ pre code {
   position: relative;
   width: 100%;
   padding-right: 15px;
-  padding-left: 15px;
+  /*padding-left: 15px;*/
 }
 
 .col {
@@ -1311,7 +1310,7 @@ pre code {
   }
 
   .offset-md-4 {
-    margin-left: 33.3333333333%;
+    margin-left: 90%;
   }
 
   .offset-md-5 {
@@ -7196,13 +7195,12 @@ button.bg-dark:focus {
 }
 
 .rounded-lg {
-  border-radius: 0.3rem !important;
+  border-radius: 0.3rem ;
 }
 
 .rounded-circle {
-  border-radius: 50% !important;
+  border-radius: 2% !important;
 }
-
 .rounded-pill {
   border-radius: 50rem !important;
 }

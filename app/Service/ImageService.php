@@ -17,7 +17,7 @@ class ImageService
      * @param $path
      * @param $field
      */
-    public function saveImage($file, $object, $path, $field = 'image')
+    public function saveAvatar($file, $object, $path, $field = 'image')
     {
         $imageFileName = time() . rand(1000000, 9999999) . '.' . $file->getClientOriginalExtension();
 //        $s3 = Storage::disk('s3');

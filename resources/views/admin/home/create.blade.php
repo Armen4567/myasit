@@ -1,5 +1,4 @@
 
-
 @extends('layouts.admin_plugin')
 @extends('layouts.app')
 

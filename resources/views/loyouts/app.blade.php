@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{asset('css/main.css')}}">
     <title>{{config('app.name','MyProject')}}</title>
 </head>
-<body>
+<body class="img js-fullheight" style="background-image: url(images/bg.jpg);">
 <div class="flex-center position-ref full-height">
     @if (Route::has('login'))
         <div class="top-right links">

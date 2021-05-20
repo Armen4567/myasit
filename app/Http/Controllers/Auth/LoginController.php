@@ -48,4 +48,8 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    function getFriendRequests(){
+        FriendRequest::where('user2_id',Auth()::id())->get();
+    }
 }

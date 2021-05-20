@@ -7,7 +7,10 @@ use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Validator;
+
 
 class RegisterController extends Controller
 {
@@ -50,7 +53,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -62,15 +65,25 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
+
+
+
     protected function create(array $data)
     {
+        $imageFileName = time() . rand(1000000, 9999999) . '.' .  $data['avatar']->getClientOriginalExtension();
+        $s3 = Storage::disk('public');
+        $s3->put('/'. $imageFileName, file_get_contents( $data['avatar']), 'public');
+
         $user =  User::create([
-            'name' => $data['name'],
+            'username' => $data['username'],
+            'full_name' => $data['full_name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'dob' => $data['dob'],
+            'gender' => $data['gender'],
+            'avatar' => $imageFileName ,
+            'password' => $data['password']
         ]);
         $user->assignRole('user');
-
         return $user;
     }
 }
