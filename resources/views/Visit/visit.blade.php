@@ -204,7 +204,7 @@
                                         <img style="width: 200px; object-fit: cover" src="{{ asset('storage/'.$post -> image)}}" alt="">
                                     </div>
                                     <div class="card-footer">
-                                        <a href="#" class="card-link btn btn-primary"><i class="fa fa-gittip"></i> Like</a>
+                                        <a href="{{route('post.like', $post->id)}}" class="card-link btn btn-primary"><i class="fa fa-gittip"></i> Like  ( {{$post->likes->count()}} {{ Str::plural('', $post->likes->count() ) }} )</a>
                                         <button  type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Comment</button>
                                         <a href="#" class="card-link btn btn-primary"><i class="fa fa-mail-forward"></i> Share</a>
                                     </div>
