@@ -1,27 +1,69 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="stylesheet" href="{{asset('css/main.css')}}">
-    <title>{{config('app.name','MyProject')}}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up Form by Colorlib</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link href="{{ asset('css/mainstyle.css') }}" rel="stylesheet">
 </head>
-<body class="img js-fullheight" style="background-image: url(images/bg.jpg);">
-<div class="flex-center position-ref full-height">
-    @if (Route::has('login'))
-        <div class="top-right links">
-            @auth
-                <a href="{{ url('/home') }}">Home</a>
-            @else
-                <a href="{{ route('login') }}">Login</a>
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}">Register</a>
-                @endif
-            @endauth
-        </div>
-    @endif
-@yield('content')
+<body style="background-image: url(images/body-bg.jpg); height: 100vh;">
+
+<div class="main">
+
+    <div class="container">
+        <form method="POST" class="appointment-form" action="{{ route('login') }}">
+            @csrf
+            <h2>Sign in</h2>
+            <div class="form-group-1">
+                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                @error('email')
+                <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                @enderror
+                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+                @error('password')
+                <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                @enderror
+            </div>
+            {{--            <div class="form-group-2">--}}
+            {{--                <h3>How would you like to bo located ?</h3>--}}
+            {{--                <div class="select-list">--}}
+            {{--                    <label class="checkbox-wrap checkbox-primary">Remember Me--}}
+            {{--                        <input type="checkbox" checked>--}}
+            {{--                        <span class="checkmark"></span>--}}
+            {{--                    </label>--}}
+            {{--                </div>--}}
+            {{--                <div class="select-list">--}}
+            {{--                    <select name="hour_appointment" id="hour_appointment">--}}
+            {{--                        <option seleected value="">Hours : 8am 10pm</option>--}}
+            {{--                        <option value="9h-11h">Hours : 9am 11pm</option>--}}
+            {{--                    </select>--}}
+            {{--                </div>--}}
+            {{--            </div>--}}
+
+            <div class="form-submit">
+                <input type="submit" name="submit" id="submit" class="submit" value="Sign in " />
+            </div>
+            <div class="form-submit">
+                <a class="submit" href="{{ route('register') }}">Register</a>
+            </div>
+        </form>
+    </div>
+
 </div>
-</body>
+
+<!-- JS -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="js/main.js"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>

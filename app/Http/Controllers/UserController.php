@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Album;
 use App\Albums;
+use App\Comment;
 use App\Models\User;
 use App\Post;
 use Illuminate\Http\Request;
@@ -18,8 +19,14 @@ class UserController extends Controller
         $this->middleware('role:user');
     }
     public function index(){
-        $user = Auth::user();
-        return view('user.index', ['user'=>$user]);
+        $posts = Post::where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->get();
+        $comments = Comment::all() ;
+        $user = Auth::user() ;
+        return view('user.index', [
+            'posts' => $posts,
+            'user' => $user ,
+            'comments' => $comments
+        ]);
     }
 
     public function edit($id){
@@ -28,7 +35,6 @@ class UserController extends Controller
 
     }
     public function update(Request $request ,$id){
-        if($request ->hasFile('avatar'))
         $user = User::findOrFail($id);
         $imageFileName = time() . rand(1000000, 9999999) . '.' . $request -> file('avatar')->getClientOriginalExtension();
         $s3 = Storage::disk('public');
@@ -44,8 +50,8 @@ class UserController extends Controller
         ]);
         return redirect()->route('user');
     }
-    public function albums(){
-        $user = Auth::user();
+    public function albums($id){
+        $user = User::findOrFail($id);
         $albums = Albums::where('user_id', $user -> id )->get();
         return view('user.albums', ['albums' => $albums, 'user' => $user]);
     }
@@ -61,7 +67,29 @@ class UserController extends Controller
 
     public function destroyAlbum($id){
         Albums::destroy($id);
-        return redirect()->route('user.albums',Auth::user()-$id );
+        return redirect()->route('user.albums',Auth::user()->id );
+    }
+
+    public function  userList(){
+        $user = Auth::user();
+        $userList  = User::all();
+
+        return view('user.userlist', [
+            'user' => $user,
+            'userList' => $userList
+        ]);
+    }
+
+    public function show($id){
+        $comments = Comment::all() ;
+        $posts = Post::where('user_id', $id )->get();
+        $user  = User::findOrFail($id);
+         return view('visit.visit', [
+             'user' => $user ,
+             'posts' => $posts,
+             'comments' => $comments
+         ]) ;
     }
 
 }
+

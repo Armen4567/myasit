@@ -8,7 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-
+    @if( $album_author -> user_id == Auth::user()->id)
     <div class="col-md-8">
         <div class="card mb-3">
             <div class="images" style="padding: 10px">
@@ -18,11 +18,11 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="image">Create Image</label>
-                                <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image"  autocomplete="image" autofocus>
+                                <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image"  accept=".jpg, .jpeg, .png" multiple autocomplete="image" autofocus>
                                 @error('image')
                                 <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -34,15 +34,17 @@
                     </div>
                 </form>
             </div>
-        </div>
+            </div>
+        @endif
+
         <div class="photo-gallery">
             <div class="container">
-                <div class="row">
+                <div class="row" style="max-width: 735px">
                     <div class="row">
                         @foreach($images as $image)
                             <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                                 <a class="thumbnail" hr ef="#" data-image-id="" data-toggle="modal" data-title="" data-image="{{asset('storage/'.$image -> name)}}" data-target="#image-gallery">
-                                    <img class="img-thumbnail" style="object-fit: cover; height: 200px; width: 650px;" src="{{asset('storage/'.$image -> name)}}" alt="Another alt text">
+                                    <img class="img-thumbnail" style="object-fit: contain; height: 200px; width: 650px;" src="{{asset('storage/'.$image -> name)}}" alt="Another alt text">
                                 </a>
                             </div>
                             <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -57,6 +59,8 @@
                                             <img id="image-gallery-image"  style="height: 500px; object-fit: contain" class="img-responsive col-md-12" src="">
                                         </div>
                                         <div class="modal-footer" style="justify-content: space-between">
+
+                                            @if($image -> user_id ==  Auth::user()->id )
                                             <form action="{{route('user.destroy.image', $image->id)}}" method="post" class="p-2 flex-grow-1">
                                                 @csrf
                                                 @method('delete')
@@ -64,6 +68,8 @@
                                                     <span class="glyphicon glyphicon-trash"><i class="fa fa-trash" aria-hidden="true"></i></span>
                                                 </button>
                                             </form>
+                                            @endif
+
                                             <button type="button" class="btn btn-secondary float-left" id="show-previous-image"><i class="fa fa-arrow-left"></i>
                                             </button>
 
@@ -74,53 +80,14 @@
                                 </div>
                             </div>
                         @endforeach
-
                     </div>
                 </div>
             </div>
 
-    </div>
-    </div>
+        </div>
+            </div>
 
 
-<!------ Include the above in your HEAD tag ---------->
-
-{{--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">--}}
-{{--<div class="container">--}}
-{{--    <div class="row">--}}
-{{--        <div class="row">--}}
-{{--            @foreach($images as $image)--}}
-{{--            <div class="col-lg-3 col-md-4 col-xs-6 thumb">--}}
-{{--                <a class="thumbnail" hr ef="#" data-image-id="" data-toggle="modal" data-title="" data-image="{{asset('storage/'.$image -> name)}}" data-target="#image-gallery">--}}
-{{--                    <img class="img-thumbnail" style="object-fit: cover; height: 200px; width: 650px;" src="{{asset('storage/'.$image -> name)}}" alt="Another alt text">--}}
-{{--                </a>--}}
-{{--            </div>--}}
-{{--        <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">--}}
-{{--            <div class="modal-dialog modal-lg">--}}
-{{--                <div class="modal-content">--}}
-{{--                    <div class="modal-header">--}}
-{{--                        <h4 class="modal-title" id="image-gallery-title"></h4>--}}
-{{--                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span>--}}
-{{--                        </button>--}}
-{{--                    </div>--}}
-{{--                    <div class="modal-body">--}}
-{{--                        <img id="image-gallery-image"  style="height: 500px; object-fit: contain" class="img-responsive col-md-12" src="">--}}
-{{--                    </div>--}}
-{{--                    <div class="modal-footer">--}}
-{{--                        <button type="button" class="btn btn-secondary float-left" id="show-previous-image"><i class="fa fa-arrow-left"></i>--}}
-{{--                        </button>--}}
-
-{{--                        <button type="button" id="show-next-image" class="btn btn-secondary float-right"><i class="fa fa-arrow-right"></i>--}}
-{{--                        </button>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--            @endforeach--}}
-
-{{--        </div>--}}
-{{--</div>--}}
-{{--</div>--}}
 
 
     <script >

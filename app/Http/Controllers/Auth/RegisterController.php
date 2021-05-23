@@ -81,7 +81,7 @@ class RegisterController extends Controller
             'dob' => $data['dob'],
             'gender' => $data['gender'],
             'avatar' => $imageFileName ,
-            'password' => $data['password']
+            'password' => Hash::make($data['password']),
         ]);
         $user->assignRole('user');
         return $user;

@@ -11,7 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -77,7 +77,7 @@
                 <!-- Breadcrumb -->
                 <nav aria-label="breadcrumb" class="main-breadcrumb">
                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="{{route('user')}}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('user')}}">Home</a></li>
                     </ol>
                 </nav>
                 <!-- /Breadcrumb -->
@@ -87,21 +87,20 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-column align-items-center text-center">
-                                    <img src="{{asset('storage/'.$user -> avatar)}}" alt="Admin"  style="width: 350px; height: 270px;object-fit: cover" class="rounded-circle" width="150">
+                                    <img src="{{asset('storage/'.Auth::user() -> avatar)}}" alt="Admin"  style="width: 350px; height: 270px;object-fit: cover" class="rounded-circle" width="150">
                                     <div class="mt-3">
-                                        <h4>{{$user -> full_name}}</h4>
-                                        <a  class="btn  btn-primary bg-dark" href="{{ route('user.edit',$user -> id)}}">Sitting</a>
+                                        <h4>{{Auth::user() -> full_name}}</h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="card mt-3" style="padding: 30px">
+                        <div class="card mt-3" style="padding: 13px">
                             <div class="row">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Username</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary" style="text-align: end">
-                                    {{$user -> username}}
+                                    {{'@'.Auth::user()-> username}}
                                 </div>
                             </div>
                             <hr>
@@ -110,7 +109,7 @@
                                     <h6 class="mb-0">Full Name</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary" style="text-align: end">
-                                    {{$user -> full_name}}
+                                    {{Auth::user() -> full_name}}
                                 </div>
                             </div>
                             <hr>
@@ -119,7 +118,7 @@
                                     <h6 class="mb-0">Email</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary" style="text-align: end">
-                                    {{$user -> email}}
+                                    {{Auth::user() -> email}}
                                 </div>
                             </div>
                             <hr>
@@ -128,7 +127,7 @@
                                     <h6 class="mb-0">Date of Birthday</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary" style="text-align: end">
-                                    {{$user -> dob}}
+                                    {{Auth::user() -> dob}}
                                 </div>
                             </div>
                             <hr>
@@ -137,7 +136,7 @@
                                     <h6 class="mb-0">Gender</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary" style="text-align: end">
-                                    {{$user -> gender}}
+                                    {{Auth::user() -> gender}}
                                 </div>
                             </div>
                             <hr>

@@ -26,7 +26,6 @@
                                                     <div class="text-center text-sm-left mb-2 mb-sm-0">
                                                         <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{$user -> full_name}}</h4>
                                                         <p class="mb-0">{{$user -> username}}</p>
-{{--                                                        <div class="text-muted"><small>Last seen 2 hours ago</small></div>--}}
                                                         <div class="mt-2">
                                                                 <label for="changeProfileAvatar"> <i class="fa fa-fw fa-camera"></i> Change Photo</label>
                                                             <input type="file" class="d-none" id="changeProfileAvatar">
@@ -34,7 +33,6 @@
                                                         </div>
                                                     </div>
                                                     <div class="text-center text-sm-right">
-{{--                                                        <span class="badge badge-secondary">Joined</span>--}}
                                                         <div class="text-muted"><small>Joined {{$user -> created_at}}</small></div>
                                                     </div>
                                                 </div>
@@ -181,20 +179,6 @@
                                     </div>
                                 </div>
                             </div>
-
-{{--                            <div class="col-12 col-md-3 mb-3">--}}
-{{--                                <div class="card mb-3">--}}
-{{--                                    <div class="card-body">--}}
-{{--                                        <div class="px-xl-3">--}}
-{{--                                            <button class="btn btn-block btn-secondary">--}}
-{{--                                                <i class="fa fa-sign-out"></i>--}}
-{{--                                                <span>Logout</span>--}}
-{{--                                            </button>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-
-{{--                            </div>--}}
                         </div>
 
                     </div>
