@@ -11,13 +11,11 @@ use Illuminate\Support\Facades\Storage;
 class ImagesController extends Controller
 {
     public function  index($id){
-//        $user = User::
-        $album_id = $id ;
+            $album_id = $id ;
         $images = Images::where('album_id', $id)->get();
         $album_author = Albums::where('id', $album_id)->get();
         $user_id = $album_author[0]-> user_id ;
         $user = User::findOrFail($user_id);
-//return dd($user) ;
         return view('user.image', [
             'album_id' => $album_id,
             'images' => $images,
@@ -27,6 +25,9 @@ class ImagesController extends Controller
     }
      public function store(Request $request, $id)
      {
+         request()->validate([
+             'image' => 'required|image|mimes:jpeg,png,jpg',
+         ]);
          $image = new Images();
 
          if ($request->has('image')){

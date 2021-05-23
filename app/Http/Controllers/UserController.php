@@ -35,6 +35,7 @@ class UserController extends Controller
 
     }
     public function update(Request $request ,$id){
+
         $user = User::findOrFail($id);
         $imageFileName = time() . rand(1000000, 9999999) . '.' . $request -> file('avatar')->getClientOriginalExtension();
         $s3 = Storage::disk('public');
@@ -57,6 +58,7 @@ class UserController extends Controller
     }
 
     public function storeAlbums(Request $request){
+
         $album = new Albums();
         $album->name = $request->input('name');
         $album->user_id = Auth::user()->id;

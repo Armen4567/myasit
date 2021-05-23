@@ -17,7 +17,6 @@ class FriendController extends Controller
     public function getAdd($username)
     {
         $user = User::where('username', $username)->first();
-        # если пользователь не найден в базе
         if ( ! $user )
         {
             return redirect()
@@ -46,7 +45,6 @@ class FriendController extends Controller
       return redirect()
           ->route('user.visit', ['id' => $user->id]) ;
     }
-
 
     public function getAccept($username)
     {

@@ -110,7 +110,7 @@
                                 <div class="col-md-8">
                                     <div class="d-flex flex-column comment-section">
                                         @foreach($comments as $comment)
-                                            @if($comment -> post_id  == $post -> id)
+{{--                                            @if($comment -> post_id  == $post -> id) --}}
                                                 <div class="bg-white p-2">
                                                     <div class="d-flex flex-row user-info"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
                                                         <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">Marry Andrews</span><span class="date text-black-50">Shared publicly - Jan 2020</span></div>
@@ -119,7 +119,7 @@
                                                         <p class="comment-text">{{$comment ->  body }}</p>
                                                     </div>
                                                 </div>
-                                            @endif
+{{--                                            @endif--}}
                                         @endforeach
                                         <div class="bg-white">
                                             <form action="{{route('send.comment', $post->id)}}" method="post" enctype="multipart/form-data" class="p-2 flex-grow-1">
