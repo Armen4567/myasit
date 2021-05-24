@@ -35,9 +35,9 @@
         </div>
 
         <div class="col-lg-6"  style="max-width: 100%">
-            <h3>Запросы в друзья</h3>
+            <h3>Friend Request</h3>
             @if ( !$requests->count() )
-                <p>У вас нет запросов в друзья.</p>
+                <p>There are no requests yet</p>
             @else
                 @foreach ($requests as $user)
                     <div class="col-sm-6 col-lg-4 mb-4"  style="max-width: 100%">

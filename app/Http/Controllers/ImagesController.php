@@ -16,6 +16,7 @@ class ImagesController extends Controller
         $album_author = Albums::where('id', $album_id)->get();
         $user_id = $album_author[0]-> user_id ;
         $user = User::findOrFail($user_id);
+//        dd($user);
         return view('user.image', [
             'album_id' => $album_id,
             'images' => $images,
@@ -42,7 +43,9 @@ class ImagesController extends Controller
          return redirect()->route('user.show.albums',$id );
      }
      public function destroy($id){
+        $getImage  = Images::where('id', $id)->get();
+        $getId = $getImage[0] ->  album_id ;
         Images::destroy($id) ;
-         return redirect()->route('user.show.albums', Auth::user()->id);
+         return redirect()->route('user.show.albums', $getId);
      }
 }
